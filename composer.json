@@ -1,0 +1,32 @@
+{
+    "name": "arete/collection-pipeline",
+    "type": "library",
+    "version": "0.2.1",
+    "description": "PHP (partial) implementation of a pipeline collection.",
+    "keywords": ["collection", "pipeline", "arete"],
+    "authors": [
+        {
+            "name": "AreteCode",
+            "email": "aretecode@gmail.com"
+        }
+    ],
+    "require": {
+        "league/pipeline": "dev-master",
+        "arete/support": "dev-master"
+    },       
+    "require-dev": {        
+        "phpunit/phpunit": "5.1.*",
+        "symfony/var-dumper": "3.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arete\\CollectionPipeline\\": ["src/", "tests/"]
+        }
+    },    
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.2.1-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
