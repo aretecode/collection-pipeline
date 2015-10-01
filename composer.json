@@ -22,7 +22,10 @@
     "autoload": {
         "psr-4": {
             "Arete\\CollectionPipeline\\": ["src/", "tests/"]
-        }
+        },           
+        "files": [
+            "bootstrap.php"
+        ] 
     },    
     "extra": {
         "branch-alias": {
