@@ -67,6 +67,7 @@ $result = CP::from($array)->wheres('getId', 'is_string')->all();
 ## `!` string functions
 ```php
 $result = CP::from($array)->wheres('getId', '!is_string')->all();
+
 # gives: everything in $array except #7
 ```
 
@@ -74,7 +75,7 @@ $result = CP::from($array)->wheres('getId', '!is_string')->all();
 [comparison operator tests](https://github.com/aretecode/collection-pipeline/blob/master/tests/MathComparisonTest.php)
 
 ```php
-$result = CP::from($array)->wheres('getId', '>' 110)->all();
+$result = CP::from($array)->wheres('getId', '>', 110)->all();
 
 # gives: [9 => $array[9]]
 ```
@@ -135,7 +136,6 @@ $result = CP::from($array)->wheres('getId', function($value) {
     }
     return false;
 })->all();
-
 
 # gives: [10 => $array[10]]
 ```
