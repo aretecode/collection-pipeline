@@ -12,7 +12,7 @@ After reading [Martin Fowler on the Collection Pipeline](http://martinfowler.com
 # Example
 
 ## This is our example group we will use
-```
+```php
 use Arete\CollectionPipeline\CollectionPipeline as CP;
 
 class MockValueObject {
@@ -58,14 +58,14 @@ $array = array(
 
 
 ## string functions
-```
+```php
 $result = CP::from($array)->wheres('getId', 'is_string')->all();
 
 # gives: [7 => $array[7]]
 ```
 
 ## `!` string functions
-```
+```php
 $result = CP::from($array)->wheres('getId', '!is_string')->all();
 # gives: everything in $array except #7
 ```
@@ -73,13 +73,13 @@ $result = CP::from($array)->wheres('getId', '!is_string')->all();
 ## [comparison operators](http://php.net/manual/en/language.operators.comparison.php)
 [comparison operator tests](https://github.com/aretecode/collection-pipeline/blob/master/tests/MathComparisonTest.php)
 
-```
+```php
 $result = CP::from($array)->wheres('getId', '>' 110)->all();
 # gives: [9 => $array[9]]
 ```
 
 ## chaining
-```
+```php
 $result = CP::from($array)->wheres('getId', '!is_string')->wheres('getId', '>', 10)->wheres('getName', '===', 'tim')->all();
 # gives: [19 => $array[19]]
 ```
@@ -88,7 +88,7 @@ $result = CP::from($array)->wheres('getId', '!is_string')->wheres('getId', '>', 
 ## argument order: 
 The property|method (X) as the first argument, and the value you are using in the comparison (Y).
 
-```
+```php
 // one does contain joe, but none contain derek 
 $stringItWouldBeIn = 'joe,derek';
 $x = 'getName';
@@ -103,7 +103,7 @@ $result = CP::from($array)->wheresYX($x, 'containsSubString', $y)->all();
 ## Laravel Illuminate: 
 Since it extends [Illuminate\Support\Collection](http://laravel.com/api/master/Illuminate/Support/Collection.html), you can use their functions, such as:
 
-```
+```php
 $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->keys();
 
 # gives: [9 => $array[9]]
@@ -116,7 +116,7 @@ $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->keys();
 By default it will first check if it's a `method`|`property`|`callable`.
 If you want to only check for that method:
 
-```
+```php
 // will only check for the method `getId`
 $result = CP::from($array)->wheres('getId', '>', 110, 'method')->all();
 
@@ -124,7 +124,7 @@ $result = CP::from($array)->wheres('getId', '>', 110, 'method')->all();
 ```
 
 ## [callables](https://github.com/aretecode/collection-pipeline/blob/master/tests/CallableTest.php)
-```
+```php
 $stringItWouldBeIn = 'joe,jonathon';
 $result = CP::from($array)->wheresYX('getName', 'containsSubString', $stringItWouldBeIn, 'callable')->all();
 $result = CP::from($array)->wheres('getId', function($value) {
@@ -140,7 +140,7 @@ $result = CP::from($array)->wheres('getId', function($value) {
 
 ## value: 
 Value is an optional parameter, so if you want to check say, a `property` only, but have no value to compare it to:
-```
+```php
 // will only check for the property `id`,
 // it could be ['property', 'method'] if you wanted to use a method if the property was not there
 // or it could be ['property', 'method', 'callable'] (which is default)
