@@ -106,7 +106,7 @@ Since it extends [Illuminate\Support\Collection](http://laravel.com/api/master/I
 ```php
 $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->keys();
 
-# gives: [9 => $array[9]]
+# gives: [7]
 ```
 
 
