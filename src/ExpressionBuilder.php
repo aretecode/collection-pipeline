@@ -96,7 +96,7 @@ class ExpressionBuilder
                 return $x <> $y;
 
             case self::SPACE:
-                return $x <=> $y;
+                return @($x <=> $y);
 
             default:
                 throw new InvalidArgumentException('operator did not match any case, it was `' . $operator . '`');
