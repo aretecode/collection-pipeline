@@ -75,12 +75,14 @@ $result = CP::from($array)->wheres('getId', '!is_string')->all();
 
 ```php
 $result = CP::from($array)->wheres('getId', '>' 110)->all();
+
 # gives: [9 => $array[9]]
 ```
 
 ## chaining
 ```php
 $result = CP::from($array)->wheres('getId', '!is_string')->wheres('getId', '>', 10)->wheres('getName', '===', 'tim')->all();
+
 # gives: [19 => $array[19]]
 ```
        
