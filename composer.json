@@ -1,6 +1,7 @@
 {
     "name": "arete/collection-pipeline",
     "type": "library",
+    "license": "MIT",
     "version": "0.2.1",
     "description": "PHP (partial) implementation of a pipeline collection.",
     "keywords": ["collection", "pipeline", "arete"],
