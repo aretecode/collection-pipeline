@@ -95,8 +95,15 @@ class ExpressionBuilder
             case self::NEQGL:
                 return $x <> $y;
 
+            /**
+             * @TODO: find out how to use this on PHP5.6 
+             * - either composer load the file
+             * - custom parse error handling will not continue so
+             */
             case self::SPACE:
-                return @($x <=> $y);
+                throw new \Exception('operator unfortunately is currently not supported :-( keep dreaming, we will reach space! <=>');
+                break;
+                // return $x <=> $y;
 
             default:
                 throw new InvalidArgumentException('operator did not match any case, it was `' . $operator . '`');
