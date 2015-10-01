@@ -169,5 +169,5 @@ Run via the command line by going to `arete/collection-pipeline` directory and r
 * [x] option to pass in an array with the '!' if you want it to be not?
 * [x] move ExpressionBuilder to Constructor()
 * [ ] optimize the filters so they can be combined and done in one loop when requested as array / all()?
-* [ ] pass in multiple string functions & comparison operators, such as `'is_string | is_int & >'` be able to do `('methodName', 'strlen >', 5)` (could use some Symfony\ExpressionLanguage optionally if alias are required)
+* [ ] pass in multiple string functions & comparison operators, such as `'is_string | is_int & >'` be able to do `('methodName', 'strlen >', 5)` (could use some Symfony\ExpressionLanguage optionally if alias are required) when this is done, it will really use the pipeline how it ought to
 * [ ] move examples out of readme (except for 1), and into [tests/]
