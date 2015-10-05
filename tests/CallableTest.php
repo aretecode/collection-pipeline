@@ -9,7 +9,7 @@ class CallableTest extends CollectionPipelineTestSuite {
     protected $keyValueTest = "";
 
     public function testCallable() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', function($value) {
             // 6 is true
             if ($value == 2 || $value == 6) {
@@ -25,7 +25,7 @@ class CallableTest extends CollectionPipelineTestSuite {
     }
 
     public function testCallableManual() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $resultManual = CP::from($array)->wheres('getId', function($value) {
             // 6 is true
             if ($value == 2 || $value == 6) {
@@ -46,7 +46,7 @@ class CallableTest extends CollectionPipelineTestSuite {
 
     public function testCallableXY() {
         $somethingElse = 'not needed';
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheresXY('getId', function($value, $key) {
             
             $this->keyValueTest = $key;
@@ -68,7 +68,7 @@ class CallableTest extends CollectionPipelineTestSuite {
 
     public function testCallableYX() {
         $somethingElse = 'not needed';
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheresXY('getId', function($key, $value) {
           
             $this->keyValueTest = $value;

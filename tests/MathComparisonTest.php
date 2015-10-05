@@ -6,7 +6,7 @@ use Arete\CollectionPipeline\CollectionPipeline as CP;
 
 class MathComparisonTest extends CollectionPipelineTestSuite {
     public function testGreaterThanOrEqualTo() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', 'is_int')->wheres('getId', '>=', 111)->all();
 
         $expected = [2 => $array[2]];
@@ -14,7 +14,7 @@ class MathComparisonTest extends CollectionPipelineTestSuite {
     }
 
     public function testLessThanOrEqualToWithoutStrings() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', '!is_string')->wheres('getId', '!is_null')->wheres('getId', '<=', 6)->all();
 
         $expected = [
@@ -25,7 +25,7 @@ class MathComparisonTest extends CollectionPipelineTestSuite {
     }
 
     public function testLessThanOrEqualTo() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', '<=', 6)->all();
 
         $expected = [
@@ -38,7 +38,7 @@ class MathComparisonTest extends CollectionPipelineTestSuite {
     }
 
     public function testLessThan() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', 'is_int')->wheres('getId', '<', 0)->all();
 
         $expected = [6 => $array[6]];
@@ -46,7 +46,7 @@ class MathComparisonTest extends CollectionPipelineTestSuite {
     }
 
     public function testEqualTo() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', '===', 6)->all();
 
         $expected = [8 => $array[8]];
@@ -54,7 +54,7 @@ class MathComparisonTest extends CollectionPipelineTestSuite {
     }
 
     public function testGreaterThan() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', 'is_int')->wheres('getId', '>', 110)->all();
 
         $expected = [2 => $array[2]];

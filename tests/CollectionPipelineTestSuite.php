@@ -2,24 +2,24 @@
 
 namespace Arete\CollectionPipeline;
 
-use Arete\CollectionPipeline\MockValueObject;
+use Arete\CollectionPipeline\MockEntity;
 
 class CollectionPipelineTestSuite extends \PHPUnit_Framework_TestCase {
-    protected $mockValueObjectArray;
+    protected $mockEntityArray;
 
     protected function setUp() {
-        $this->mockValueObjectArray = array(
-            new MockValueObject(null, "other"), #0
-            new MockValueObject(10, "other"),   #1
-            new MockValueObject(111, "other"),  #2
-            new MockValueObject(11, "other"),   #3
-            new MockValueObject(12, "other"),   #4
-            new MockValueObject(13, "other"),   #5
-            new MockValueObject(-2, "other"),   #6
-            new MockValueObject("eh", "frank"), #7
-            new MockValueObject(6, "frank"),    #8
-            new MockValueObject(10, "frank"),   #9
-            new MockValueObject(["eh"], "joe"), #10
+        $this->mockEntityArray = array(
+            new MockEntity(null, "other"), #0
+            new MockEntity(10, "other"),   #1
+            new MockEntity(111, "other"),  #2
+            new MockEntity(11, "other"),   #3
+            new MockEntity(12, "other"),   #4
+            new MockEntity(13, "other"),   #5
+            new MockEntity(-2, "other"),   #6
+            new MockEntity("eh", "frank"), #7
+            new MockEntity(6, "frank"),    #8
+            new MockEntity(10, "frank"),   #9
+            new MockEntity(["eh"], "joe"), #10
         );
     }
 }

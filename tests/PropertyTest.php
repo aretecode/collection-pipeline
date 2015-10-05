@@ -4,11 +4,11 @@ namespace Arete\CollectionPipeline;
 
 use Arete\CollectionPipeline\CollectionPipeline as CP;
 
-use Arete\CollectionPipeline\MockValueObject;
+use Arete\CollectionPipeline\MockEntity;
 
 class PropertyTest extends CollectionPipelineTestSuite {
     public function testPropertyIsTheSameWhenManuallyDefined() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
 
         $resultManual = CP::from($array)->wheres('id', 'is_string', null, 'property')->all();
         $resultAuto = CP::from($array)->wheres('id', 'is_string')->all();
@@ -17,7 +17,7 @@ class PropertyTest extends CollectionPipelineTestSuite {
     }
 
     public function testProperty() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
 
         $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->all();
 
@@ -26,7 +26,7 @@ class PropertyTest extends CollectionPipelineTestSuite {
     }
 
     public function testPropertyNonExistent() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
 
         $result = CP::from($array)->wheres('nonExistentProperty', 'is_string')->all();
 

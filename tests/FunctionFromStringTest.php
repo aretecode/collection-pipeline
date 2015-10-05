@@ -6,7 +6,7 @@ use Arete\CollectionPipeline\CollectionPipeline as CP;
 
 class FunctionFromStringTest extends CollectionPipelineTestSuite {
     public function testNotIsString() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', '!is_string')->all();
 
         $expected = [
@@ -25,7 +25,7 @@ class FunctionFromStringTest extends CollectionPipelineTestSuite {
     }
 
     public function testIsString() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', 'is_string')->all();
 
         $expected = [$array[7]];
@@ -33,7 +33,7 @@ class FunctionFromStringTest extends CollectionPipelineTestSuite {
     }
 
     public function testXY() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $arrayItWouldBeIn = ['joe', 'percy'];
         $result = CP::from($array)->wheresXY('getName', 'in_array', $arrayItWouldBeIn)->all();
 
@@ -42,7 +42,7 @@ class FunctionFromStringTest extends CollectionPipelineTestSuite {
     }
 
     public function testYX() {
-        $array = $this->mockValueObjectArray;
+        $array = $this->mockEntityArray;
         $stringItWouldBeIn = 'joe,chrissy';
         $result = CP::from($array)->wheresYX('getName', 'containsSubString', $stringItWouldBeIn, 'callable')->all();
 

@@ -2,7 +2,7 @@
 
 namespace Arete\CollectionPipeline;
 
-class MockValueObject {
+class MockEntity {
     public $id;
     public $name;
 

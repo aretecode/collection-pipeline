@@ -1,5 +1,6 @@
 # Arete\CollectionPipeline
 [![Build Status](https://secure.travis-ci.org/aretecode/collection-pipeline.svg)](https://travis-ci.org/aretecode/collection-pipeline)
+[![HHVM Status](http://hhvm.h4cc.de/badge/arete/collection-pipeline.svg)](http://hhvm.h4cc.de/package/arete/collection-pipeline)
 [![Author](http://img.shields.io/badge/author-@aretecode-blue.svg)](https://twitter.com/aretecode)
 [![Latest Unstable Version](https://poser.pugx.org/arete/collection-pipeline/v/unstable)](https://poser.pugx.org/arete/collection-pipeline/v/unstable)
 [![License](https://poser.pugx.org/arete/collection-pipeline/license)](http://packagist.org/packages/arete/collection-pipeline)
