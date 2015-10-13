@@ -11,6 +11,16 @@ use League\Pipeline\StageInterface;
  *  ExtendedPipelineDecorator
  */
 class ExtendedPipeline extends Pipeline {
+    public function satisfying($specification) {
+        return $this->pipe(new CallableStage(function ($payload) use ($specification) {
+            foreach ((array)$payload as $key => $payloadValue) 
+                if (!$specification->isSatisfiedBy($payloadValue)) 
+                    unset($payload[$key]);
+
+            return $payload;
+        }));
+    }
+
     /**
      * [ ] @TODO: another argument (optional) whether to check for property or function first
      * [ ] @TODO: whether to use is_callable or not
@@ -244,8 +254,6 @@ class ExtendedPipeline extends Pipeline {
      */
     protected function methodOrProperty($methodOrProperty, $payloadValue, $types = ['method', 'property', 'callable']) {        
         foreach ((array)$types as $type) {          
-            // echo "methodOrProperty \n<br>"; dump($type);
-
             if ($type == 'property' && property_exists($payloadValue, $methodOrProperty))
                 return $payloadValue->{$methodOrProperty};
 

@@ -2,7 +2,7 @@
 [![Build Status](https://secure.travis-ci.org/aretecode/collection-pipeline.svg)](https://travis-ci.org/aretecode/collection-pipeline)
 [![HHVM Status](http://hhvm.h4cc.de/badge/arete/collection-pipeline.svg)](http://hhvm.h4cc.de/package/arete/collection-pipeline)
 [![Author](http://img.shields.io/badge/author-@aretecode-blue.svg)](https://twitter.com/aretecode)
-[![Latest Unstable Version](https://poser.pugx.org/arete/collection-pipeline/v/unstable)](https://poser.pugx.org/arete/collection-pipeline/v/unstable)
+[![Latest Unstable Version](https://poser.pugx.org/arete/collection-pipeline/v/unstable)](https://packagist.org/packages/arete/collection-pipeline)
 [![License](https://poser.pugx.org/arete/collection-pipeline/license)](http://packagist.org/packages/arete/collection-pipeline)
 
 Filter a collection of objects without making a bunch of loops & ifs.
@@ -175,3 +175,6 @@ Run via the command line by going to `arete/collection-pipeline` directory and r
 * [ ] pass in multiple string functions & comparison operators, such as `'is_string | is_int & >'` be able to do `('methodName', 'strlen >', 5)` (could use some Symfony\ExpressionLanguage optionally if alias are required) when this is done, it will really use the pipeline how it ought to
 * [ ] move examples out of readme (except for 1), and into [tests/]
 * [x] add in spaceship comparison operator depending on version (thanks @seldaek)
+* [ ] SatisfyingTest
+* [ ] `ands` using last method?
+* [ ] refactor `ExendedPipeline` so it is less of a God object.
