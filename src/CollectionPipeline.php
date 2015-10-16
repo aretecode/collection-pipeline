@@ -2,7 +2,6 @@
 
 namespace Arete\CollectionPipeline;
 
-use InvalidArgumentException;
 use Arete\Support\Arr;
 use Illuminate\Support\Collection as LaravelCollection;
 

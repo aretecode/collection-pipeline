@@ -2,6 +2,7 @@
 
 namespace Arete\CollectionPipeline;
 
+use InvalidArgumentException;
 use Arete\CollectionPipeline\AbstractExpressionBuilder;
 
 /**

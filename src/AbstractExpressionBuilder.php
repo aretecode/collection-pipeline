@@ -2,6 +2,8 @@
 
 namespace Arete\CollectionPipeline;
 
+use InvalidArgumentException;
+
 /**
  * Modified www.doctrine-project.org ExpressionBuilder
  */
