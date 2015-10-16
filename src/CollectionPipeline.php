@@ -2,6 +2,7 @@
 
 namespace Arete\CollectionPipeline;
 
+use InvalidArgumentException;
 use Arete\Support\Arr;
 use Illuminate\Support\Collection as LaravelCollection;
 
@@ -52,6 +53,13 @@ class CollectionPipeline extends LaravelCollection {
         return self::from($extendedPipeline);
     }
     ##############
+    public function satisfying($specification) {
+        $extendedPipeline = (new ExtendedPipeline)
+            ->satisfying($specification)
+            ->process($this->items);
+
+        return self::from($extendedPipeline);
+    }
 
     public function pushAll($array) {
         foreach ($array as $item)

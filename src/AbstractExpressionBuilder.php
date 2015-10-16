@@ -10,6 +10,7 @@ abstract class AbstractExpressionBuilder
     const EQ  = '=';
     const EQEQEQ = '===';
     const SAME = '===';
+    const EQEQ = '==';
     const NEQ = '!=';
     const NEQEQ = '!==';
     const NEQGL = '<>';
@@ -72,6 +73,9 @@ abstract class AbstractExpressionBuilder
             case self::SAME:
                 return $x === $y;
 
+            case self::EQEQ:
+                return $x == $y;
+
             case self::NEQEQ:
                 return $x !== $y;
 
@@ -92,7 +96,7 @@ abstract class AbstractExpressionBuilder
 
             case self::NEQGL:
                 return $x <> $y;
-
+           
             default:
                 throw new InvalidArgumentException('operator did not match any case, it was `' . $operator . '`');
         }

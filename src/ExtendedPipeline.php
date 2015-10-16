@@ -45,7 +45,6 @@ class ExtendedPipeline extends Pipeline {
      * @return ExtendedPipeline
      */
     public function wheres($methodOrProperty, $condition, $value = null, $types = ['method', 'property', 'callable']) {
-        // $collection = $this->collection; use ($collection)
         return $this->pipe(new CallableStage(function ($payload) use ($methodOrProperty, $condition, $value, $types) {
             $conditionExpression = new ExpressionBuilder();
 
