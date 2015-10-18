@@ -16,7 +16,7 @@ After reading [Martin Fowler on the Collection Pipeline](http://martinfowler.com
 ```php
 use Arete\CollectionPipeline\CollectionPipeline as CP;
 
-class MockValueObject {
+class MockEntity {
     public $id;
     public $name;
     public function __construct($id, $name) {
@@ -33,27 +33,27 @@ class MockValueObject {
 
 // ids are just random for testing
 $array = array(
-    new MockValueObject(null, "eric"), #0
-    new MockValueObject(10, "tim"),    #1
-    new MockValueObject(111, "beau"),  #2
-    new MockValueObject(11, "ross"),   #3
-    new MockValueObject(12, "sarah"),  #4
-    new MockValueObject(13, "taylor"), #5
-    new MockValueObject(-42, "lea"),   #6
-    new MockValueObject("eh", "phil"), #7
-    new MockValueObject(6, "larry"),   #8
-    new MockValueObject(10, "frank"),  #9
-    new MockValueObject(["eh"], "joe"),#10
+    new MockEntity(null, "eric"), #0
+    new MockEntity(10, "tim"),    #1
+    new MockEntity(111, "beau"),  #2
+    new MockEntity(11, "ross"),   #3
+    new MockEntity(12, "sarah"),  #4
+    new MockEntity(13, "taylor"), #5
+    new MockEntity(-42, "lea"),   #6
+    new MockEntity("eh", "phil"), #7
+    new MockEntity(6, "larry"),   #8
+    new MockEntity(10, "frank"),  #9
+    new MockEntity(["eh"], "joe"),#10
 
-    new MockValueObject(99, "kayla"),  #12
-    new MockValueObject(0, "martin"),  #11
-    new MockValueObject(1, "brad"),    #13
-    new MockValueObject(2, "luke"),    #14
-    new MockValueObject(3, "paul"),    #15
-    new MockValueObject(4, "ash"),     #16
-    new MockValueObject(5, "davey"),   #17    
-    new MockValueObject(18,"anthony"), #18
-    new MockValueObject(19,"tim"),     #19
+    new MockEntity(99, "kayla"),  #12
+    new MockEntity(0, "martin"),  #11
+    new MockEntity(1, "brad"),    #13
+    new MockEntity(2, "luke"),    #14
+    new MockEntity(3, "paul"),    #15
+    new MockEntity(4, "ash"),     #16
+    new MockEntity(5, "davey"),   #17    
+    new MockEntity(18,"anthony"), #18
+    new MockEntity(19,"tim"),     #19
 );    
 ```
 
