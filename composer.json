@@ -2,7 +2,7 @@
     "name": "arete/collection-pipeline",
     "type": "library",
     "license": "MIT",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "PHP (partial) implementation of a pipeline collection.",
     "keywords": ["collection", "pipeline", "arete"],
     "authors": [
@@ -16,8 +16,7 @@
         "arete/support": "dev-master"
     },       
     "require-dev": {        
-        "phpunit/phpunit": "5.1.*",
-        "symfony/var-dumper": "3.0.*"
+        "phpunit/phpunit": "5.1.*"
     },
     "autoload": {
         "psr-4": {
@@ -29,7 +28,7 @@
     },    
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.3-dev"
+            "dev-master": "0.2.4-dev"
         }
     },
     "minimum-stability": "dev"

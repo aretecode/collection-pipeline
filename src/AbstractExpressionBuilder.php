@@ -7,8 +7,7 @@ use InvalidArgumentException;
 /**
  * Modified www.doctrine-project.org ExpressionBuilder
  */
-abstract class AbstractExpressionBuilder
-{
+abstract class AbstractExpressionBuilder {
     const EQ  = '=';
     const EQEQEQ = '===';
     const SAME = '===';
@@ -20,43 +19,9 @@ abstract class AbstractExpressionBuilder
     const LTE = '<=';
     const GT  = '>';
     const GTE = '>=';
+    const INSTOF = 'instanceof';
+    const NOTINSTOF = '!instanceof';
 
-    /**
-     * Creates a conjunction of the given boolean expressions.
-     *
-     * Example:
-     *
-     *     [php]
-     *     // (u.type = ?) AND (u.role = ?)
-     *     $expr->andX('u.type = ?', 'u.role = ?'));
-     *
-     * @param mixed $x Optional clause. Defaults = null, but requires
-     *                 at least one defined when converting to string.
-     *
-     * @return \Doctrine\DBAL\Query\Expression\CompositeExpression
-     */
-    public function andX($x = null)
-    {
-        return new CompositeExpression(CompositeExpression::TYPE_AND, func_get_args());
-    }
-    /**
-     * Creates a disjunction of the given boolean expressions.
-     *
-     * Example:
-     *
-     *     [php]
-     *     // (u.type = ?) OR (u.role = ?)
-     *     $qb->where($qb->expr()->orX('u.type = ?', 'u.role = ?'));
-     *
-     * @param mixed $x Optional clause. Defaults = null, but requires
-     *                 at least one defined when converting to string.
-     *
-     * @return \Doctrine\DBAL\Query\Expression\CompositeExpression
-     */
-    public function orX($x = null)
-    {
-        return new CompositeExpression(CompositeExpression::TYPE_OR, func_get_args());
-    }
     /**
      * Creates a comparison expression.
      *
@@ -66,8 +31,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return bool
      */
-    public function comparison($x, $operator, $y)
-    {
+    public function comparison($x, $operator, $y) {
         switch ($operator) {
             case self::EQ:
                 return $x == $y;
@@ -96,13 +60,20 @@ abstract class AbstractExpressionBuilder
             case self::GTE:
                 return $x >= $y;
 
+            case self::INSTOF:
+                return $x instanceof $y;
+
+            case self::NOTINSTOF:
+                return !($x instanceof $y);
+
             case self::NEQGL:
                 return $x <> $y;
-           
+          
             default:
                 throw new InvalidArgumentException('operator did not match any case, it was `' . $operator . '`');
         }
     }
+    
     /**
      * Creates an equality comparison expression with the given arguments.
      *
@@ -118,8 +89,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function eq($x, $y)
-    {
+    public function eq($x, $y) {
         return $this->comparison($x, self::EQ, $y);
     }
     /**
@@ -136,8 +106,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function neq($x, $y)
-    {
+    public function neq($x, $y) {
         return $this->comparison($x, self::NEQ, $y);
     }
     /**
@@ -154,8 +123,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function lt($x, $y)
-    {
+    public function lt($x, $y) {
         return $this->comparison($x, self::LT, $y);
     }
     /**
@@ -172,8 +140,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function lte($x, $y)
-    {
+    public function lte($x, $y) {
         return $this->comparison($x, self::LTE, $y);
     }
     /**
@@ -190,8 +157,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function gt($x, $y)
-    {
+    public function gt($x, $y) {
         return $this->comparison($x, self::GT, $y);
     }
     /**
@@ -208,8 +174,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function gte($x, $y)
-    {
+    public function gte($x, $y) {
         return $this->comparison($x, self::GTE, $y);
     }
     /**
@@ -219,8 +184,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function isNull($x)
-    {
+    public function isNull($x) {
         return is_null($x);
     }
     /**
@@ -230,8 +194,7 @@ abstract class AbstractExpressionBuilder
      *
      * @return string
      */
-    public function isNotNull($x)
-    {
+    public function isNotNull($x) {
         return !is_null($x);
     }
 }

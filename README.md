@@ -58,18 +58,35 @@ $array = array(
 ```
 
 
-## string functions
+## String functions
 ```php
 $result = CP::from($array)->wheres('getId', 'is_string')->all();
 
 # gives: [7 => $array[7]]
 ```
 
-## `!` string functions
+## `!` String functions
 ```php
 $result = CP::from($array)->wheres('getId', '!is_string')->all();
 
 # gives: everything in $array except #7
+```
+
+## Each
+Use `::wheresEach` to compare the whole value without using any accessors.
+
+### instanceof
+```php
+$result = CP::from($array)->wheres('instanceof', MockEntity::CLASS)->all();
+
+# gives: everything in $array 
+```
+
+### `!` instanceof
+```php
+$result = CP::from($array)->wheres('!instanceof', MockEntity::CLASS)->all();
+
+# gives: empty array, they all are instances of MockEntity
 ```
 
 ## [comparison operators](http://php.net/manual/en/language.operators.comparison.php)
@@ -90,7 +107,7 @@ $result = CP::from($array)->wheres('getId', '!is_string')->wheres('getId', '>', 
        
 
 ## argument order: 
-The property|method (X) as the first argument, and the value you are using in the comparison (Y).
+The accessor return value (X) as the first argument, and the value you are using in the comparison (Y).
 
 ```php
 // one does contain joe, but none contain derek 
@@ -104,6 +121,9 @@ $result = CP::from($array)->wheresYX($x, 'containsSubString', $y)->all();
 # gives: [10 => $array[10]]
 ```
 
+
+
+
 ## Laravel Illuminate: 
 Since it extends [Illuminate\Support\Collection](http://laravel.com/api/master/Illuminate/Support/Collection.html), you can use their functions, such as:
 
@@ -114,15 +134,25 @@ $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->keys();
 ```
 
 
-## types: 
-[methods](https://github.com/aretecode/collection-pipeline/blob/master/tests/MethodTest.php)
-[properties](https://github.com/aretecode/collection-pipeline/blob/master/tests/PropertyTest.php)
-By default it will first check if it's a `method`|`property`|`callable`.
-If you want to only check for that method:
+## Types: 
+* [methods](https://github.com/aretecode/collection-pipeline/blob/master/tests/MethodTest.php)
+* [properties](https://github.com/aretecode/collection-pipeline/blob/master/tests/PropertyTest.php)
+* [callables (using closure)](https://github.com/aretecode/collection-pipeline/blob/master/tests/CallableTest.php)
+* [key | index](https://github.com/aretecode/collection-pipeline/blob/master/tests/ArrayTest.php)
+By default it will first check if it's a `method`|`property`|`callable`|`index`.
+If you want to only check for that particular type, in this case, `method`:
 
 ```php
 // will only check for the method `getId`
 $result = CP::from($array)->wheres('getId', '>', 110, 'method')->all();
+
+# gives: [9 => $array[9]]
+```
+
+#### Reverse order
+```php
+// compares 110 < $payload->getId() 
+$result = CP::from($array)->wheres('getId', '<', 110, 'method', 'yx')->all();
 
 # gives: [9 => $array[9]]
 ```
@@ -132,16 +162,15 @@ $result = CP::from($array)->wheres('getId', '>', 110, 'method')->all();
 $stringItWouldBeIn = 'joe,jonathon';
 $result = CP::from($array)->wheresYX('getName', 'containsSubString', $stringItWouldBeIn, 'callable')->all();
 $result = CP::from($array)->wheres('getId', function($value) {
-    if ($value == 'tim') {
-        return true;
-    }
+    if ($value == 'tim') 
+        return true
     return false;
 })->all();
 
 # gives: [10 => $array[10]]
 ```
 
-## value: 
+## Value: 
 Value is an optional parameter, so if you want to check say, a `property` only, but have no value to compare it to:
 ```php
 // will only check for the property `id`,
@@ -151,6 +180,33 @@ $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->all();
 
 # gives: [9 => $array[9]]
 ```
+
+
+## Specification
+[arete/specification](https://github.com/aretecode/specification)
+
+```php
+
+use Arete\Specification\Specification;
+use Arete\Specification\SpecificationTrait;
+
+class NameEquals implements Specification {
+    use ParameterizedSpecification;
+    use SpecificationTrait;
+
+    public function isSatisfiedBy($entity) {
+        if ($entity->getName() == $this->value) 
+            return true;
+        return false;
+    }
+}
+
+$result = CP::from($array)->satisfying(new NameEquals('tim'));
+
+# gives: [10 => $array[10]]
+```
+
+
 
 ## Installation
 It can be installed from [Packagist](https://packagist.org/arete/collection-pipeline) using [Composer](https://getcomposer.org/). 
@@ -173,8 +229,14 @@ Run via the command line by going to `arete/collection-pipeline` directory and r
 * [x] move ExpressionBuilder to Constructor()
 * [ ] optimize the filters so they can be combined and done in one loop when requested as array / all()?
 * [ ] pass in multiple string functions & comparison operators, such as `'is_string | is_int & >'` be able to do `('methodName', 'strlen >', 5)` (could use some Symfony\ExpressionLanguage optionally if alias are required) when this is done, it will really use the pipeline how it ought to
-* [ ] move examples out of readme (except for 1), and into [tests/]
+* [ ] similar to the last todo, but with chaining method calls 
+* [ ] move examples out of readme (except for 1), and into [examples/]
 * [x] add in spaceship comparison operator depending on version (thanks @seldaek)
-* [ ] SatisfyingTest
 * [ ] `ands` using last method?
-* [ ] refactor `ExendedPipeline` so it is less of a God object.
+* [x] refactor `ExendedPipeline` so it is less of a God object.
+* [ ] array key in Specification 
+* [x] array key for matching along with the method, property, and callable
+* [x] abstract argsOrderYX & XY
+* [x] remove null check from ::wheresComparison
+* [x] add ability to reverse arguments in expressions
+* [ ] add casting of accessor

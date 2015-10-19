@@ -28,25 +28,41 @@ class CollectionPipeline extends LaravelCollection {
         $this->items = Arr::removeSatisfying($this->items, $specification);
     }
 
-    public function wheres($function, $condition, $value = null, $type = ['method', 'property', 'callable']) {
+    public function wheresKey($condition, $value = null, $order = null) {
         $extendedPipeline = (new ExtendedPipeline)
-            ->wheres($function, $condition, $value, $type = ['method', 'property', 'callable'])
+            ->wheresKey($condition, $value, $order)
+            ->process($this->items);
+
+        return self::from($extendedPipeline);
+    }
+    
+    public function wheresEach($condition, $value = null, $type = ['method', 'property', 'callable', 'index']) {
+        $extendedPipeline = (new ExtendedPipeline)
+            ->wheres(null, $condition, $value, $type)
+            ->process($this->items);
+
+        return self::from($extendedPipeline);
+    }
+
+    public function wheres($accessor, $condition, $value = null, $type = ['method', 'property', 'callable', 'index'], $order = null) {
+        $extendedPipeline = (new ExtendedPipeline)
+            ->wheres($accessor, $condition, $value, $type, $order)
             ->process($this->items);
 
         return self::from($extendedPipeline);
     }
 
     ##############
-    public function wheresYX($function, $condition, $value, $type = ['method', 'property', 'callable']) {
+    public function wheresYX($accessor, $condition, $value, $type = ['method', 'property', 'callable', 'index']) {
         $extendedPipeline = (new ExtendedPipeline)
-            ->wheresYX($function, $condition, $value, $type = ['method', 'property', 'callable'])
+            ->wheresYX($accessor, $condition, $value, $type)
             ->process($this->items);
 
         return self::from($extendedPipeline);
     }
-    public function wheresXY($function, $condition, $value, $type = ['method', 'property', 'callable']) {
+    public function wheresXY($accessor, $condition, $value, $type = ['method', 'property', 'callable', 'index']) {
         $extendedPipeline = (new ExtendedPipeline)
-            ->wheresXY($function, $condition, $value, $type = ['method', 'property', 'callable'])
+            ->wheresXY($accessor, $condition, $value, $type)
             ->process($this->items);
 
         return self::from($extendedPipeline);

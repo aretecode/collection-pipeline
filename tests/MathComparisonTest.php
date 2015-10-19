@@ -5,6 +5,15 @@ namespace Arete\CollectionPipeline;
 use Arete\CollectionPipeline\CollectionPipeline as CP;
 
 class MathComparisonTest extends CollectionPipelineTestSuite {
+    public function testReverseGreaterThan() {
+        $array = $this->mockEntityArray;
+
+        // would be ->getId() < 100, but with 'yx', it is 100 < ->getId()
+        $result = CP::from($array)->wheres('getId', 'is_int')->wheres('getId', '<', 100, 'method', 'yx')->all();
+        $expected = [2 => $array[2]];
+        $this->assertEquals($result, $expected);
+    }
+
     public function testGreaterThanOrEqualTo() {
         $array = $this->mockEntityArray;
         $result = CP::from($array)->wheres('getId', 'is_int')->wheres('getId', '>=', 111)->all();
