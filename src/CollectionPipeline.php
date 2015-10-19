@@ -17,7 +17,7 @@ class CollectionPipeline extends LaravelCollection {
     public function insertBeforeKey($key, $element) {
         $this->items = Arr::insertBeforeKey($this->items, $key, $element);
     }
-    public function insertAfterKey($afterKey, $key, $value) {
+    public function insertAfterKey($afterKey, $key, $element) {
         $this->items = Arr::insertAfterKey($this->items, $afterKey, $key, $element);
     }
     public function insertAfterMatching($specification, $value) {

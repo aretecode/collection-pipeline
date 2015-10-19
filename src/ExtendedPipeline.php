@@ -111,7 +111,7 @@ class ExtendedPipeline extends Pipeline {
      */
     public function wheresKey($condition, $value, $order = null) {
         return $this->pipe(new CallableStage(function ($payload) use ($condition, $value, $order) {
-            foreach ((array)$payload as $key => $payloadValue)
+            foreach (array_keys((array)$payload) as $key)
                 $payload = $this->removePayloadIfNeeded($key, $payload, $condition, $value, $key, $order);
 
             return $payload;
