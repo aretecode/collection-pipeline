@@ -4,6 +4,7 @@
 [![Author](http://img.shields.io/badge/author-@aretecode-blue.svg)](https://twitter.com/aretecode)
 [![Latest Unstable Version](https://poser.pugx.org/arete/collection-pipeline/v/unstable)](https://packagist.org/packages/arete/collection-pipeline)
 [![License](https://poser.pugx.org/arete/collection-pipeline/license)](http://packagist.org/packages/arete/collection-pipeline)
+[![Codacy Badge](https://api.codacy.com/project/badge/88c8b9f55cf94e2ab16765a7c95be7aa)](https://www.codacy.com/app/aretecode/collection-pipeline)
 
 Filter a collection of objects without making a bunch of loops & ifs.
 
