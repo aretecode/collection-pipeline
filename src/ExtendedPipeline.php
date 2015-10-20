@@ -7,29 +7,10 @@ use League\Pipeline\PipelineBuilder;
 use League\Pipeline\CallableStage;
 use League\Pipeline\StageInterface;
 
-// use SymfonyPropertyAccessor?
-// call_user_func_array
-// class HasNotOperatorSpecification
-/*
-1. WHAT ABOUT CALLING A :: __METHOD__ ON THE $PAYLOADVALUE THAT TAKES IN AN ARGUMENT LIKE THE $Y/$VALUE?
-use call_user_func_array??
-
-2. What about doing like
-
-Could use `WhereEach`?
-
-2.1 CP::from($arr)->where('==', $otherObject)
-
-2.2 CP::from($arr)->whereEach('is_object')
-
-2.2 CP::from($arr)->whereXY('in_array', $array)
-*/
-
 /**
  * ExtendedPipelineDecorator
  */
 class ExtendedPipeline extends Pipeline {
-
     /**
      * Constructor.
      *

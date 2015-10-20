@@ -8,7 +8,7 @@
 
 Filter a collection of objects without making a bunch of loops & ifs.
 
-After reading [Martin Fowler on the Collection Pipeline](http://martinfowler.com/articles/collection-pipeline/) I wanted to use something similar in PHP, thus, this was born. [League\Pipeline](https://github.com/thephpleague/pipeline) was used as was [Illuminate\Support\Collection](http://laravel.com/api/master/Illuminate/Support/Collection.html) (all functions from this Collection are available in the chain.) 
+After reading [Martin Fowler on the Collection Pipeline](http://martinfowler.com/articles/collection-pipeline/) I wanted to use something similar in PHP, thus, this was born. [League\Pipeline](https://github.com/thephpleague/pipeline) was used as was [Illuminate\Support\Collection](http://laravel.com/api/master/Illuminate/Support/Collection.html) (all functions from this Collection are available in the chain.)
 
 
 # Example
@@ -52,10 +52,10 @@ $array = array(
     new MockEntity(2, "luke"),    #14
     new MockEntity(3, "paul"),    #15
     new MockEntity(4, "ash"),     #16
-    new MockEntity(5, "davey"),   #17    
+    new MockEntity(5, "davey"),   #17
     new MockEntity(18,"anthony"), #18
     new MockEntity(19,"tim"),     #19
-);    
+);
 ```
 
 
@@ -80,7 +80,7 @@ Use `::wheresEach` to compare the whole value without using any accessors.
 ```php
 $result = CP::from($array)->wheres('instanceof', MockEntity::CLASS)->all();
 
-# gives: everything in $array 
+# gives: everything in $array
 ```
 
 ### `!` instanceof
@@ -105,13 +105,13 @@ $result = CP::from($array)->wheres('getId', '!is_string')->wheres('getId', '>', 
 
 # gives: [19 => $array[19]]
 ```
-       
 
-## argument order: 
+
+## argument order:
 The accessor return value (X) as the first argument, and the value you are using in the comparison (Y).
 
 ```php
-// one does contain joe, but none contain derek 
+// one does contain joe, but none contain derek
 $stringItWouldBeIn = 'joe,derek';
 $x = 'getName';
 $y = $stringItWouldBeIn;
@@ -125,7 +125,7 @@ $result = CP::from($array)->wheresYX($x, 'containsSubString', $y)->all();
 
 
 
-## Laravel Illuminate: 
+## Laravel Illuminate:
 Since it extends [Illuminate\Support\Collection](http://laravel.com/api/master/Illuminate/Support/Collection.html), you can use their functions, such as:
 
 ```php
@@ -135,7 +135,7 @@ $result = CP::from($array)->wheres('id', 'is_string', null, 'property')->keys();
 ```
 
 
-## Types: 
+## Types:
 * [methods](https://github.com/aretecode/collection-pipeline/blob/master/tests/MethodTest.php)
 * [properties](https://github.com/aretecode/collection-pipeline/blob/master/tests/PropertyTest.php)
 * [callables (using closure)](https://github.com/aretecode/collection-pipeline/blob/master/tests/CallableTest.php)
@@ -152,7 +152,7 @@ $result = CP::from($array)->wheres('getId', '>', 110, 'method')->all();
 
 #### Reverse order
 ```php
-// compares 110 < $payload->getId() 
+// compares 110 < $payload->getId()
 $result = CP::from($array)->wheres('getId', '<', 110, 'method', 'yx')->all();
 
 # gives: [9 => $array[9]]
@@ -163,7 +163,7 @@ $result = CP::from($array)->wheres('getId', '<', 110, 'method', 'yx')->all();
 $stringItWouldBeIn = 'joe,jonathon';
 $result = CP::from($array)->wheresYX('getName', 'containsSubString', $stringItWouldBeIn, 'callable')->all();
 $result = CP::from($array)->wheres('getId', function($value) {
-    if ($value == 'tim') 
+    if ($value == 'tim')
         return true
     return false;
 })->all();
@@ -171,7 +171,7 @@ $result = CP::from($array)->wheres('getId', function($value) {
 # gives: [10 => $array[10]]
 ```
 
-## Value: 
+## Value:
 Value is an optional parameter, so if you want to check say, a `property` only, but have no value to compare it to:
 ```php
 // will only check for the property `id`,
@@ -196,7 +196,7 @@ class NameEquals implements Specification {
     use SpecificationTrait;
 
     public function isSatisfiedBy($entity) {
-        if ($entity->getName() == $this->value) 
+        if ($entity->getName() == $this->value)
             return true;
         return false;
     }
@@ -210,7 +210,7 @@ $result = CP::from($array)->satisfying(new NameEquals('tim'));
 
 
 ## Installation
-It can be installed from [Packagist](https://packagist.org/arete/collection-pipeline) using [Composer](https://getcomposer.org/). 
+It can be installed from [Packagist](https://packagist.org/arete/collection-pipeline) using [Composer](https://getcomposer.org/).
 
 In your project root just run:
 
@@ -230,14 +230,14 @@ Run via the command line by going to `arete/collection-pipeline` directory and r
 * [x] move ExpressionBuilder to Constructor()
 * [ ] optimize the filters so they can be combined and done in one loop when requested as array / all()?
 * [ ] pass in multiple string functions & comparison operators, such as `'is_string | is_int & >'` be able to do `('methodName', 'strlen >', 5)` (could use some Symfony\ExpressionLanguage optionally if alias are required) when this is done, it will really use the pipeline how it ought to
-* [ ] similar to the last todo, but with chaining method calls 
+* [ ] similar to the last todo, but with chaining method calls
 * [ ] move examples out of readme (except for 1), and into [examples/]
 * [x] add in spaceship comparison operator depending on version (thanks @seldaek)
 * [ ] `ands` using last method?
 * [x] refactor `ExendedPipeline` so it is less of a God object.
-* [ ] array key in Specification 
+* [ ] array key in `Specification`
 * [x] array key for matching along with the method, property, and callable
 * [x] abstract argsOrderYX & XY
-* [x] remove null check from ::wheresComparison
+* [x] remove null check from `::wheresComparison`
 * [x] add ability to reverse arguments in expressions
 * [ ] add casting of accessor

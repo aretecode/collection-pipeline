@@ -13,12 +13,15 @@ class CollectionPipeline extends LaravelCollection {
      */
     public function insertBeforeMatching($specification, $element) {
         $this->items = Arr::insertAfterMatching($this->items, $specification, $element);
+        return $this;
     }
     public function insertBeforeKey($key, $element) {
         $this->items = Arr::insertBeforeKey($this->items, $key, $element);
+        return $this;
     }
     public function insertAfterKey($afterKey, $key, $element) {
         $this->items = Arr::insertAfterKey($this->items, $afterKey, $key, $element);
+        return $this;
     }
     public function insertAfterMatching($specification, $value) {
         return Arr::insertAfterMatching($this->items, $specification, $value);
