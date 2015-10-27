@@ -2,7 +2,7 @@
     "name": "arete/collection-pipeline",
     "type": "library",
     "license": "MIT",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "PHP (partial) implementation of a pipeline collection.",
     "keywords": ["collection", "pipeline", "arete"],
     "authors": [
@@ -23,12 +23,12 @@
             "Arete\\CollectionPipeline\\": ["src/", "tests/"]
         },           
         "files": [
-            "bootstrap.php"
+            ["bootstrap.php", "src/functions.php"]
         ] 
     },    
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.4-dev"
+            "dev-master": "0.2.5-dev"
         }
     },
     "minimum-stability": "dev"

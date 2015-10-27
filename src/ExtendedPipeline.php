@@ -50,6 +50,36 @@ class ExtendedPipeline extends Pipeline {
             return $payload;
         }));
     }
+    
+    /**
+     * @see ExtendedPipeline::wheres()
+     * @TODO: 'callable', 'index', and 'key' 
+     * 
+     * 
+     * @param  string           $accessor
+     * @param  string|callable  [$condition] (optional) 
+     * @param  mixed            [$value] (optional)
+     * @param  string|array     [$types] (optional) mixture of 'method', 'property', in ltr order
+     * @param  string|null      [$order] (optional) 'xy', 'yx', or null
+     * @return ExtendedPipeline
+     */
+    public function mapWheres($accessor, $condition = 'truthy', $value = null, $types = ['method', 'property'], $order = null) {
+        return $this->pipe(new CallableStage(function ($payload) use ($accessor, $condition, $value, $types, $order) {
+            foreach ((array)$payload as $key => $payloadValue) {
+                $x = $this->accessor->usingType($accessor, $key, $payloadValue, $types);
+                
+                // if it should NOT be removed, then we use the access or as the new value
+                if (!$this->shouldRemove($condition, $x, $value, $order))
+                    $payload[$key] = $x;
+                // it should be removed
+                // @TODO: should it have options for dealing with this? 
+                else
+                    unset($payload[$key]);
+            }
+
+            return $payload;
+        }));
+    }
 
     /**
      * [ ] @TODO: some sort of plugin to be used to loop through when removing things that do not match, could be a callable?
@@ -68,14 +98,13 @@ class ExtendedPipeline extends Pipeline {
      *
      * @param  string           $accessor
      * @param  string|callable  $condition
-     * @param  mixed            $value
+     * @param  mixed            [$value] (optional)
      * @param  string|array     [$types] (optional) mixture of 'method', 'property', 'callable', 'index', or 'key' in ltr order
      * @param  string|null      [$order] (optional) 'xy', 'yx', or null
      * @return ExtendedPipeline
      */
     public function wheres($accessor, $condition, $value = null, $types = ['method', 'property', 'callable', 'index', 'key'], $order = null) {
         return $this->pipe(new CallableStage(function ($payload) use ($accessor, $condition, $value, $types, $order) {
-
             foreach ((array)$payload as $key => $payloadValue) {
                 $x = $this->accessor->usingType($accessor, $key, $payloadValue, $types);
                 $payload = $this->removePayloadIfNeeded($key, $payload, $condition, $value, $x, $order);
@@ -103,7 +132,8 @@ class ExtendedPipeline extends Pipeline {
     /**
      * @param  string           $accessor
      * @param  string|callable  $condition
-     * @param  string           $value
+     * @param  string           $value-+
+     * 
      * @param  string|array     [$types] (optional) mixture of 'method', 'property', 'callable', 'index', or 'key'  in ltr order
      * @return ExtendedPipeline
      */

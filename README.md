@@ -241,3 +241,4 @@ Run via the command line by going to `arete/collection-pipeline` directory and r
 * [x] remove null check from `::wheresComparison`
 * [x] add ability to reverse arguments in expressions
 * [ ] add casting of accessor
+* [ ] add ::reduce() similar implementation as ::map()

@@ -10,7 +10,7 @@ class Accessor {
      * @param  string|array  [$types] (optional) mixture of 'method', 'property', 'callable', 'index', or 'key' in ltr order     
      * @return mixed
      */
-    public function usingType($accessor, $payloadKey, $payloadValue, $types) {    
+    public function usingType($accessor, $payloadKey, $payloadValue, $types) { 
         foreach ((array)$types as $type) {          
             if ($type == 'property' && property_exists($payloadValue, $accessor))
                 return $payloadValue->{$accessor};

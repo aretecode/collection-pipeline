@@ -21,6 +21,7 @@ abstract class AbstractExpressionBuilder {
     const GTE = '>=';
     const INSTOF = 'instanceof';
     const NOTINSTOF = '!instanceof';
+    const TRUTHY = 'truthy';
 
     /**
      * Creates a comparison expression.
@@ -65,6 +66,9 @@ abstract class AbstractExpressionBuilder {
 
             case self::NOTINSTOF:
                 return !($x instanceof $y);
+
+            case self::TRUTHY:
+                return ($x) ? true : false;
 
             case self::NEQGL:
                 return $x <> $y;

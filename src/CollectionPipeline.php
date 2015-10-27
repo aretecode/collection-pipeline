@@ -39,6 +39,14 @@ class CollectionPipeline extends LaravelCollection {
         return self::from($extendedPipeline);
     }
     
+    public function mapWheres($accessor, $condition = 'truthy', $value = null, $type = ['method', 'property'], $order = null) {
+        $extendedPipeline = (new ExtendedPipeline)
+            ->mapWheres($accessor, $condition, $value, $type, $order)
+            ->process($this->items);
+
+        return self::from($extendedPipeline);
+    }   
+
     public function wheresEach($condition, $value = null, $type = ['method', 'property', 'callable', 'index']) {
         $extendedPipeline = (new ExtendedPipeline)
             ->wheres(null, $condition, $value, $type)
@@ -47,7 +55,7 @@ class CollectionPipeline extends LaravelCollection {
         return self::from($extendedPipeline);
     }
 
-    public function wheres($accessor, $condition, $value = null, $type = ['method', 'property', 'callable', 'index'], $order = null) {
+    public function wheres($accessor, $condition = 'truthy', $value = null, $type = ['method', 'property', 'callable', 'index'], $order = null) {
         $extendedPipeline = (new ExtendedPipeline)
             ->wheres($accessor, $condition, $value, $type, $order)
             ->process($this->items);
@@ -86,5 +94,42 @@ class CollectionPipeline extends LaravelCollection {
 
     public static function from($array) {
         return new self($array);
+    }
+
+    ##############
+    public function __call($name, $arguments) {
+        $index = 0;
+        $isMap = isset($arguments[0]) && $arguments[0] === 'map';
+        if ($isMap)
+            ++$index;
+
+        /**
+         * would be perfect for `??`, but supporting PHP 5.6+... would be
+         * $wheres[0] = $arguments[$index++] ?? 'truthy';
+         * positions 0-3 (where) or 1-4 (map)
+         */
+        $wheres = [];
+
+        # accessor
+        $wheres[0] = $name;
+        
+        # condition
+        $wheres[1] = isset($arguments[$index]) ? $arguments[$index] : 'truthy';  
+        $index++;
+        
+        # value
+        $wheres[2] = isset($arguments[$index]) ? $arguments[$index] : null;      
+        $index++;
+        
+        # type
+        $wheres[3] = isset($arguments[$index]) ? $arguments[$index] : ['method', 'property', 'callable', 'index']; 
+        $index++;
+        
+        # order
+        $wheres[4] = isset($arguments[$index]) ? $arguments[$index] : null;      
+        if ($isMap)
+            return $this->mapWheres($wheres[0], $wheres[1], $wheres[2], $wheres[3], $wheres[4]);
+
+        return $this->wheres($wheres[0], $wheres[1], $wheres[2], $wheres[3], $wheres[4]);
     }
 }
