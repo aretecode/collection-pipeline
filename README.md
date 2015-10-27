@@ -6,7 +6,7 @@
 [![License](https://poser.pugx.org/arete/collection-pipeline/license)](http://packagist.org/packages/arete/collection-pipeline)
 [![Codacy Badge](https://api.codacy.com/project/badge/88c8b9f55cf94e2ab16765a7c95be7aa)](https://www.codacy.com/app/aretecode/collection-pipeline)
 
-Filter a collection of objects without making a bunch of loops & ifs.
+Work with a collection of objects without making a bunch of callables, loops, & ifs.
 
 After reading [Martin Fowler on the Collection Pipeline](http://martinfowler.com/articles/collection-pipeline/) I wanted to use something similar in PHP, thus, this was born. [League\Pipeline](https://github.com/thephpleague/pipeline) was used as was [Illuminate\Support\Collection](http://laravel.com/api/master/Illuminate/Support/Collection.html) (all functions from this Collection are available in the chain.)
 
