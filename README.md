@@ -210,7 +210,7 @@ $result = CP::from($array)->satisfying(new NameEquals('tim'));
 
 
 ## Installation
-It can be installed from [Packagist](https://packagist.org/arete/collection-pipeline) using [Composer](https://getcomposer.org/).
+It can be installed from [Packagist](https://packagist.org/packages/arete/collection-pipeline) using [Composer](https://getcomposer.org/).
 
 In your project root just run:
 
